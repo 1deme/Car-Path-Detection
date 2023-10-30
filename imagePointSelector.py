@@ -1,8 +1,9 @@
 import cv2
 
 class ImagePointSelector:
-    def __init__(self, image_path):
+    def __init__(self, image_path, max_dimension=500):
         self.image_path = image_path
+        self.max_dimension = max_dimension
         self.coordinate_list = []
 
     def click_event(self, event, x, y, flags, param):
@@ -19,8 +20,9 @@ class ImagePointSelector:
             self.coordinate_list.append((adjusted_x, adjusted_y))
     
     def select_points(self):
-        image = cv2.imread(self.image_path)
-        cv2.imshow('Image', image)
+        # Resize the image before displaying it
+        resized_image = self.resize_image(self.image_path, self.max_dimension)
+        cv2.imshow('Image', resized_image)
         cv2.setMouseCallback('Image', self.click_event)
 
         while True:
@@ -30,3 +32,15 @@ class ImagePointSelector:
 
         cv2.destroyAllWindows()
         return self.coordinate_list
+
+    @staticmethod
+    def resize_image(image_path, max_dimension):
+        image = cv2.imread(image_path)
+        original_height, original_width, _ = image.shape
+
+        scale = min(max_dimension / original_width, max_dimension / original_height)
+        new_width = int(original_width * scale)
+        new_height = int(original_height * scale)
+        resized_image = cv2.resize(image, (new_width, new_height))
+
+        return resized_image

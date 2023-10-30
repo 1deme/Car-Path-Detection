@@ -15,13 +15,10 @@ common_height = 100
 selector = ImagePointSelector('maze.png')
 selected_points = selector.select_points()
 
-transformed_points = []
-for image_x, image_y in selected_points:
-    common_x = image_x / 3
-    common_y = image_y / 3
-    transformed_points.append((common_x, common_y))
+print(selected_points)
+bezier = BezierPolynomial(selected_points[0], selected_points[1], selected_points[2], selected_points[3])
 
-bezier = BezierPolynomial(transformed_points[0], transformed_points[1])
-
-visualizer = Visualize([(bezier.linearX, bezier.linearY)])
+visualizer = Visualize([(bezier.linearX, bezier.linearY)
+                        ,(bezier.quadraticX, bezier.quadraticY)
+                        ,(bezier.cubicX, bezier.cubicY)])
 visualizer.plot()
