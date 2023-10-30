@@ -4,7 +4,7 @@ from visualize import Visualize
 from imagePointSelector import ImagePointSelector
 
 
-image_path = 'maze.png'  
+image_path = 'maze_image.png'  
 image = cv2.imread(image_path)
 image_height, image_width, _ = image.shape
 
@@ -12,7 +12,7 @@ common_width = 100
 common_height = 100
 
 
-selector = ImagePointSelector('maze.png')
+selector = ImagePointSelector(image_path)
 selected_points = selector.select_points()
 
 print(selected_points)
