@@ -2,8 +2,6 @@
 
 **Author:** Demetre Labadze
 
-**Date:** [Current Date]
-
 ## Introduction
 
 Can you guess a car's path based on the points it is going to cross? With this software, the answer is "yes." This project allows you to recreate a car's path using Bezier curves and De Casteljau's algorithm to connect the dots.
