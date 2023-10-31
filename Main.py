@@ -1,5 +1,5 @@
 import cv2
-from BezierPolynomial import BezierPolynomial
+from BezierPolynomialArray import BezierPolynomialArray
 from Visualize import Visualize
 from ImagePointSelector import ImagePointSelector
 
@@ -10,12 +10,7 @@ image = cv2.imread(background_image_path)
 selector = ImagePointSelector(background_image_path)
 selected_points = selector.select_points()
 
-print(selected_points)
-bezier = BezierPolynomial(selected_points[0], selected_points[1], selected_points[2], selected_points[3])
+beziers = BezierPolynomialArray(selected_points)
 
-
-visualizer = Visualize([(bezier.linearX, bezier.linearY)
-                        ,(bezier.quadraticX, bezier.quadraticY)
-                        ,(bezier.cubicX, bezier.cubicY)],
-                        background_image_path=background_image_path)
+visualizer = Visualize(beziers.bezier_array,background_image_path=background_image_path)
 visualizer.plot()
