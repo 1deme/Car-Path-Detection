@@ -11,11 +11,9 @@ class Visualize:
     def plot(self, num_points=100):
         t_values = np.linspace(0, 1, num_points)
 
-        # Create a background figure and axis
         fig, ax = plt.subplots()
         
         if self.background_image_path:
-            # If a background image is provided, set it as the background
             background_image = Image.open(self.background_image_path)
             ax.imshow(background_image, extent=[-self.plot_range, self.plot_range, -self.plot_range, self.plot_range])
 

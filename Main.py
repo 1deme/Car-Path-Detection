@@ -1,24 +1,18 @@
 import cv2
-from bezier import BezierPolynomial
-from visualize import Visualize
-from imagePointSelector import ImagePointSelector
+from BezierPolynomial import BezierPolynomial
+from Visualize import Visualize
+from ImagePointSelector import ImagePointSelector
 
+background_image_path = 'maze_image.png'
 
-image_path = 'maze_image.png'  
-image = cv2.imread(image_path)
-image_height, image_width, _ = image.shape
+image = cv2.imread(background_image_path)
 
-common_width = 100 
-common_height = 100
-
-
-selector = ImagePointSelector(image_path)
+selector = ImagePointSelector(background_image_path)
 selected_points = selector.select_points()
 
 print(selected_points)
 bezier = BezierPolynomial(selected_points[0], selected_points[1], selected_points[2], selected_points[3])
 
-background_image_path = 'maze_image.png'
 
 visualizer = Visualize([(bezier.linearX, bezier.linearY)
                         ,(bezier.quadraticX, bezier.quadraticY)
