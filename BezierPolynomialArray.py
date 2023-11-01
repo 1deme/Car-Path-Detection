@@ -12,26 +12,35 @@ class BezierPolynomialArray:
             if start + 3 < len(points):
                 if self.calculate_degree(points, start, start + 3) == "cubic":
                     self.bezier_array.append(BezierPolynomial(points[start], points[start + 1], points[start + 2], points[start + 3]))
-                    start += 4
-                elif start + 2 < len(points):
-                    if self.calculate_degree(points, start, start + 2) == "quadratic":
-                        self.bezier_array.append(BezierPolynomial(points[start], points[start + 1], points[start + 2]))
-                        start += 3
+                    start += 3
+                elif self.calculate_degree(points, start, start + 2) == "quadratic":
+                    self.bezier_array.append(BezierPolynomial(points[start], points[start + 1], points[start + 2]))
+                    start += 2
                 else:
                     self.bezier_array.append(BezierPolynomial(points[start], points[start + 1]))
-                    start += 2
-            else:
+                    start += 1
+            elif start + 2 < len(points):
+                if self.calculate_degree(points, start, start + 2) == "quadratic":
+                        self.bezier_array.append(BezierPolynomial(points[start], points[start + 1], points[start + 2]))
+                        start += 2
+                else:
+                    self.bezier_array.append(BezierPolynomial(points[start], points[start + 1]))
+                    start += 1
+            elif start + 1 < len(points):
                 self.bezier_array.append(BezierPolynomial(points[start], points[start + 1]))
-                start += 2
+                start += 1
+            else:
+                start += 1    
+            print("wont stop")
 
+                
     def calculate_degree(self, points, start, end):
         angle_sum = 0
         for i in range(start, end):
             if i >= len(points) or start >= len(points):
                 break
 
-            if points[i][0] == points[start][0]:
-                slope1 = 0
+            if points[i][0] == points[start][0] or points[end][0] == points[i][0]:
                 continue
 
             slope1 = (points[i][1] - points[start][1]) / (points[i][0] - points[start][0])

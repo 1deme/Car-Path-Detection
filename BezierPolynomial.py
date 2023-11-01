@@ -2,7 +2,10 @@ class BezierPolynomial:
     def __init__(self, p1, p2, p3=None, p4=None):
         self.linearX = lambda t: (1 - t) * p1[0] + t * p2[0]
         self.linearY = lambda t: (1 - t) * p1[1] + t * p2[1]
-
+        self.quadraticX = None
+        self.quadraticY = None
+        self.cubicX = None
+        self.cubicY = None
         if p3 is not None:
             self.linearX2 = lambda t: (1 - t) * p2[0] + t * p3[0]
             self.linearY2 = lambda t: (1 - t) * p2[1] + t * p3[1]
